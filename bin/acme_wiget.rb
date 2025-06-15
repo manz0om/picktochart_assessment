@@ -18,11 +18,11 @@ begin
 
   while input.downcase != 'x'
     case input
-    when '1':
+    when '1'
       puts "Enter Product Code to add to basket"
       product_code = gets.chomp
       basket.add(product_code)
-    when '2':
+    when '2'
       total = basket.total
       puts "!!! Total value of the basket = #{total} "
       puts "----------------------------"

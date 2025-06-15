@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'open3'
 require_relative '../../src/basket.rb'
 require_relative '../../lib/products.rb'
 require_relative '../../lib/delivery_rules.rb'
@@ -26,22 +25,50 @@ RSpec.describe Basket do
 
   context '#total' do
     it 'should return the total of all product present in basket, no offers applied, total < 50' do
-
+      sub.add('B01')
+      sub.add('G01')
+      total = sub.total
+      expect(total).to eq(37.85)
     end
     it 'should return the total of all product present in basket, no offers applied, 50 < total < 90' do
-
+      sub.add('R01')
+      sub.add('G01')
+      total = sub.total
+      expect(total).to eq(60.85)
     end
     it 'should return the total of all product present in basket, no offers applied, total > 90' do
-
+      sub.add('R01')
+      sub.add('G01')
+      sub.add('B01')
+      sub.add('G01')
+      sub.add('B01')
+      sub.add('G01')
+      sub.add('B01')
+      total = sub.total
+      expect(total).to eq(131.65)
     end
-    it 'should return the total of all product present in basket, offers applied, total < 50' do
-
+    it 'should return the total of all product present in basket, offers applied' do
+      sub.add('R01')
+      sub.add('R01')
+      total = sub.total
+      expect(total).to eq(54.37)
     end
     it 'should return the total of all product present in basket, offers applied, 50 < total < 90' do
-
+      sub.add('R01')
+      sub.add('R01')
+      sub.add('R01')
+      sub.add('R01')
+      total = sub.total
+      expect(total).to eq(98.85)
     end
     it 'should return the total of all product present in basket, offers applied, total > 90' do
-
+      sub.add('B01')
+      sub.add('B01')
+      sub.add('R01')
+      sub.add('R01')
+      sub.add('R01')
+      total = sub.total
+      expect(total).to eq(98.27)
     end
     
   end
